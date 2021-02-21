@@ -12,25 +12,29 @@ class PubSub {
         // 同一事件放到一个数组队列
         let listeners = (this.subscribers[type] = this.subscribers[type] || []);
         listeners.push(callback);
-        return this;
+        //return this;
     }
     // 推送
-    publish(type, data) {
+    publish(type, ...args) {
         let listeners = this.subscribers[type];
         if (!listeners || listeners.length === 0) return;
         listeners.forEach(fn => {
             console.log(this);
-            fn.apply(this, data)
+            fn.apply(this, args)
         });
-        return this;
+        //return this;
     }
 
     // 取消订阅
     unsubscribe(type, callback) {
         let listeners = this.subscribers[type];
-        if (!listeners || listeners.length === 0) return;
-        this.subscribers[type] = listeners.filter(fn => fn !== callback);
-        return this;
-    }
-    
+        if (!listeners) return;
+        // 如果没有传入具体函数，就取消type对应的所有订阅
+        if (!callback) {
+            listeners && (listeners.length = 0);
+        } else {
+            this.subscribers[type] = listeners.filter(fn => fn !== callback);
+        }
+        //return this;
+    }  
 }

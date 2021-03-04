@@ -36,5 +36,40 @@ class PubSub {
             this.subscribers[type] = listeners.filter(fn => fn !== callback);
         }
         //return this;
-    }  
+    }
 }
+
+/**
+ * 观察者模式
+ */
+// 被观察者
+class Subject {
+    constructor() {
+      this.subs = [];
+    }
+    add(observer) {
+      this.subs.push(observer);
+    }
+    notify(...args) {
+      this.subs.forEach(ob => ob.update(...args));
+    }
+  }
+  // 观察者
+  class Observer {
+    update(...args) {
+      console.log('Observer -> update -> args', args);
+    }
+  }
+
+  // 使用
+  const o1 = new Observer();
+  const o2 = new Observer();
+  const o3 = new Observer();
+  const o5 = new Observer();
+  const sub = new Subject();
+  // 添加观察者
+  sub.add(o1);
+  sub.add(o2);
+  sub.add(o3);
+  // 通知观察者
+  sub.notify('嘿嘿嘿');

@@ -36,11 +36,13 @@ function Stack(){
     }
 }
 
+
+
 function MinStack() {
     let dataStack = new Stack(); // 普通栈
     let minStack = new Stack(); // 最小值栈
 
-    // push的时候,两个栈都要操作 
+    // push的时候,两个栈都要操作
     this.push = function (item) {
         // 普通的栈
         dataStack.push(item);// data_stack是常规栈,常规操作即可
@@ -56,7 +58,7 @@ function MinStack() {
         }
     };
 
-   
+
     // pop的时候,两个栈都pop
     this.pop = function () {
         dataStack.pop();

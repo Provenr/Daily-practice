@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 300px;
+      height: 300px;
+      line-height: 300px;
+      text-align: center;
+      color: #fff;
+      background: black;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script>
+    var count = 1;
+    var container = document.querySelector('.box');
+    // 防抖函数
+    // 开始边界 和 结束边界 flag
+    function debounce(fn, delay, flag) {
+      var timer = null; // 维护一个 timer
+
+      return function() {
+          var _this = this; // 取debounce执行作用域的this
+          var args = arguments;
+          clearTimeout(timer)
+          if(flag){ // 开始边界 第一次不延迟执行
+            var callNow = !timer
+            timer = setTimeout(function () {
+              timer = null
+            }, delay);
+            if(callNow){
+              fn.apply(_this, args);
+            }
+          }else{
+            timer = setTimeout(function () {
+              fn.apply(_this, args); // 用apply指向调用debounce的对象，相当于_this.fn(args);
+            }, delay);
+          }
+
+      };
+    }
+    // 事件处理函数
+    function handle(content) {
+      container.innerHTML = count++;
+      console.log(content)
+    }
+    var testDebounce = debounce(handle,1000,true)
+    // 触发事件
+    container.onmousemove = function() {
+      testDebounce('nihao')
+    }
+
+    // 节流函数
+    function  throttle(fn, delay) {
+      var timer
+      return function () {
+        let self = this
+        var args = arguments;
+        if(timer) return
+        timer = setTimeout(() => {
+          fn.apply(self,args)
+          timer = null
+        }, delay);
+      }
+    }
+      // 节流函数
+      function  throttle2(fn, delay) {
+      var previous = 0
+      return function () {
+        let self = this
+        var args = arguments;
+        var now = +new Date() // + 获取时间戳 等同Date原型上的getTime()
+        if(now - previous < delay) return
+        fn.apply(self,args)
+        timer = now
+      }
+    }
+    function testThrottle(params) {
+      console.log(params)
+    }
+    var testThrottleFn = throttle(testThrottle, 1000); // 节流函数
+    document.onmousemove = function () {
+      testThrottleFn('throttle'); // 给节流函数传参
+    }
+  </script>
+</body>
+</html>

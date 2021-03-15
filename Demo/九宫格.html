@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>九宫格</title>
+    <!-- 在这里用link标签引入中文渐变色 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chinese-gradient">
+    <style>
+        /* 清除默认样式 */
+        * { padding: 0; margin: 0; }
+
+        /* 全屏显示 */
+        html, body { height: 100%;}
+        body{display: grid; place-items: center;}
+        ul{margin-bottom: 20px; list-style: none}
+        /* 父元素 */
+        .table {
+            /* 给个合适的宽度 */
+            width: 100%;
+            height: 336px;
+
+            /* 清除默认样式 */
+            list-style: none;
+
+            /* 令其用table方式去显示 */
+            display: table;
+
+            /* 设置间距 */
+            border-spacing: 3px
+        }
+        @media screen and (min-width: 768px) {
+            .table{height: 672px;}
+        }
+        @media screen and (min-width: 1024px) {
+            .table{height: 918px;}
+        }
+
+        /* 子元素 */
+        .table li {
+            /* 令其用table-row方式去显示 */
+            display: table-row;
+        }
+
+        /* 孙子元素 */
+        .table li div {
+            /* 令其用table-cell方式去显示 */
+            display: table-cell;
+            width: 33%;
+            /* 蓝色渐变 */
+            background: var(--湖蓝)
+        }
+
+        .flex{
+            width: 330px;
+            /*height: 330px;*/
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .flex li {
+            /* 显示为网格布局 */
+            display: grid;
+            /* 子元素水平垂直居中 */
+            place-items: center;
+
+            width: 110px;
+            height: 110px;
+            border: 5px solid; /*默认 currentColor*/
+            box-sizing: border-box;
+            /* 负边距 */
+            margin: -5px 0 0 -5px;
+            /* 胭脂红渐变 */
+            background: var(--米白);
+        }
+
+        /*解决九宫格整体左上角移动, 不处于原来位置的问题*/
+        /* 第1、4、7个子元素 */
+        .flex li:nth-child(3n+1) {
+            /* 取消左负边距 */
+            margin-left: 0
+        }
+
+        /*!*!* 前三个子元素 *!*!*/
+        .flex li:nth-child(-n+3) {
+            /* 取消上负边距 */
+            margin-top: 0
+        }
+        .flex li:hover { color: red;  border: 1px solid; z-index: 1 /*继承红色*/}
+
+    </style>
+</head>
+<div class="">
+<!--边距九宫格-->
+<ul class="table">
+    <li>
+        <div>table1</div>
+        <div>table2</div>
+        <div>table3</div>
+    </li>
+    <li>
+        <div>table4</div>
+        <div>table5</div>
+        <div>table6</div>
+    </li>
+    <li>
+        <div>table7</div>
+        <div>table8</div>
+        <div>table9</div>
+    </li>
+</ul>
+
+
+<!--边框九宫格-->
+<!--在 '满格 9 格'的情况下, 子元素上加一个样式(左上 | 右下)即可，然后再在父元素上加一个互补的边框样式(右下 | 左上)-->
+
+<!-- 进化版   -->
+<ul class="flex">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+<!--    <li>8</li>-->
+<!--    <li>9</li>-->
+</ul>
+
+<script>
+    // 选择ul元素
+    const ul = document.getElementsByTagName('ul')[0]
+
+    // 监听ul元素的点击事件
+    ul.addEventListener('click', e => alert(e.target.innerText))
+
+    const flex = document.getElementsByClassName('flex')[0]
+
+    // 监听ul元素的点击事件
+    flex.addEventListener('click', e => alert(e.target.innerText))
+
+</script>
+</div>
+</html>

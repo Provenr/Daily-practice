@@ -1,0 +1,263 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <!-- <script id="jqbb" src="./20170307233848_files/jquery.min.js"></script> -->
+
+  <style type="text/css">
+    /* The magic */
+    .col {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      /*
+    Visibility delay gives the previously hovered element time to slide out before disappearing.
+    Remove the `visibility` transition to slide in current element without sliding out previous element
+  */
+      -webkit-transition: all 0.275s ease-in-out, visibility 0s 0.275s;
+      transition: all 0.275s ease-in-out, visibility 0s 0.275s;
+      visibility: hidden;
+      will-change: transform;
+      -webkit-transform: translateY(100%);
+      transform: translateY(100%);
+    }
+
+    .row:hover~.row .slide {
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+    }
+
+    .row:hover .slide {
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+
+    .row:hover .col:hover~.col .slide {
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+    }
+
+    .row:hover .col:hover .slide {
+      -webkit-transform: none;
+      transform: none;
+      visibility: visible;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+
+    /* Pen styling */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fefefe;
+      color: #333;
+      font: 14px /1.5 "Fira Sans", sans-serif;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin: 1.5em 0.5rem 1em;
+      text-align: center;
+    }
+
+    .container {
+      margin: 0 auto;
+      padding: 2rem;
+      max-width: 1200px;
+    }
+
+    .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .col {
+      color: #fff;
+      -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      min-height: 260px;
+      position: relative;
+    }
+
+    .col h2 {
+      font-weight: 300;
+      font-size: 1.33333rem;
+      line-height: 1.25;
+      margin: 0;
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 0;
+    }
+
+    .col:nth-child(2) {
+      min-width: 20%;
+    }
+
+    .col:nth-child(4) {
+      min-width: 33%;
+    }
+
+    .col:nth-child(3)+.col:nth-child(3) {
+      min-width: 50%;
+    }
+
+    .photo-container {
+      background: #0f0523 50% 50% / cover;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      -webkit-transition: 1s;
+      transition: 1s;
+      -webkit-transform-origin: bottom right;
+      transform-origin: bottom right;
+    }
+
+    .photo-container::before {
+      background: -webkit-linear-gradient(transparent, rgba(67, 17, 51, 0.5), #000320);
+      background: linear-gradient(transparent, rgba(67, 17, 51, 0.5), #000320);
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .col:hover .photo-container {
+      -webkit-transform: scale(1.25);
+      transform: scale(1.25);
+    }
+
+    .slide {
+      background: rgba(25, 1, 21, 0.8);
+      padding: 0 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hover around the boxes below</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=84)"></div>
+        <h2>Image 84 </h2>
+        <div class="slide">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=31)"></div>
+        <h2>Image 31 </h2>
+        <div class="slide">
+          <p>Doloremque quisquam molestias, est laudantium vero aliquid dolorum inventore atque sint perferendis qui
+            dolor voluptas consequuntur non.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=157)"></div>
+        <h2>Image 157 </h2>
+        <div class="slide">
+          <p>Facere illo pariatur necessitatibus fugit quo impedit, quae, corporis placeat recusandae dolor ipsa nobis!
+          </p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=246)"></div>
+        <h2>Image 246 </h2>
+        <div class="slide">
+          <p>Quam molestiae ipsa sapiente mollitia, nobis.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=94)"></div>
+        <h2>Image 94 </h2>
+        <div class="slide">
+          <p>Autem possimus perspiciatis, eaque quos repudiandae modi labore sed repellat dolorum magnam praesentium
+            expedita esse tempore saepe nulla.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=168)"></div>
+        <h2>Image 168 </h2>
+        <div class="slide">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=237)"></div>
+        <h2>Image 237 </h2>
+        <div class="slide">
+          <p>Autem possimus perspiciatis, eaque quos repudiandae modi labore sed repellat dolorum magnam praesentium
+            expedita esse tempore saepe nulla.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=133)"></div>
+        <h2>Image 133 </h2>
+        <div class="slide">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=241)"></div>
+        <h2>Image 241 </h2>
+        <div class="slide">
+          <p>Quam molestiae ipsa sapiente mollitia, nobis.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=203)"></div>
+        <h2>Image 203 </h2>
+        <div class="slide">
+          <p>Autem possimus perspiciatis, eaque quos repudiandae modi labore sed repellat dolorum magnam praesentium
+            expedita esse tempore saepe nulla.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="photo-container" style="background-image:url(https://source.unsplash.com/600x250/?sig=17)"></div>
+        <h2>Image 17 </h2>
+        <div class="slide">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+  </script>
+
+  <!-- <script src="./20170307233848_files/jq22-1.js"></script> -->
+</body>
+<div
+  style="width:32px!important;height:32px!important;display:none!important;background:#fff!important;border-radius:16px!important;box-shadow:4px 4px 8px #888!important;position:absolute!important;z-index:2147483647!important;">
+  <svg href="javascript:void(0)" style="width:24px;height:24px;margin:4px!important;" "width=" 24" height="24"
+    viewBox="0 0 768 768">
+    <path
+      d="M672 640.5v-417c0-18-13.5-31.5-31.5-31.5h-282l37.5 129h61.5v-33h34.5v33h115.5v33h-40.5c-10.5 40.5-33 79.5-61.5 112.5l87 85.5-22.5 24-87-85.5-28.5 28.5 25.5 88.5-64.5 64.5h225c18 0 31.5-13.5 31.5-31.5zM447 388.5c7.5 15 19.5 34.5 36 54 39-46.5 49.5-88.5 49.5-88.5h-127.5l10.5 34.5h31.5zM423 412.5l19.5 70.5 18-16.5c-15-16.5-27-34.5-37.5-54zM355.5 339c0-7.381-0.211-16.921-3-22.5h-126v49.5h70.5c-4.5 19.5-24 48-67.5 48-42 0-76.5-36-76.5-78s34.5-78 76.5-78c24 0 39 10.5 48 19.5l3 1.5 39-37.5-3-1.5c-24-22.5-54-34.5-87-34.5-72 0-130.5 58.5-130.5 130.5s58.5 130.5 130.5 130.5c73.5 0 126-52.5 126-127.5zM640.5 160.5c34.5 0 63 28.5 63 63v417c0 34.5-28.5 63-63 63h-256.5l-31.5-96h-225c-34.5 0-63-28.5-63-63v-417c0-34.5 28.5-63 63-63h192l28.5 96h292.5z"
+      style="fill:#3e84f4;"></path>
+  </svg></div>
+
+</html>
